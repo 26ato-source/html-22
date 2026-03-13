@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Portfolio</title>
+    <style>
+        :root {
+            --bg-main: #121214; 
+            --text-main: #ffffff;
+            --text-dim: #b0b0b0;
+            --accent: #ffffff; 
+            --border: rgba(255, 255, 255, 0.1);
+            --radius: 30px;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(50, 50, 60, 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(40, 40, 50, 0.4) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+
+        /* --- BRIGHT VERTICAL SIDE TEXT --- */
+        .side-text {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            color: #ffffff;
+            white-space: nowrap;
+            z-index: 5;
+            pointer-events: none;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+        .side-left { left: 2%; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); }
+        .side-right { right: 2%; writing-mode: vertical-rl; }
+
+        nav {
+            display: flex; width: 100%; border-bottom: 1px solid var(--border);
+            background: rgba(20, 20, 22, 0.8); backdrop-filter: blur(25px);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .nav-btn {
+            flex: 1; text-align: center; padding: 25px 0; text-decoration: none;
+            color: var(--text-dim); text-transform: uppercase; font-size: 0.7rem;
+            letter-spacing: 4px; border-right: 1px solid var(--border); transition: 0.4s;
+        }
+        .active { background: rgba(255, 255, 255, 0.05); border-bottom: 2px solid var(--accent); color: #fff; }
+
+        .hero { text-align: center; padding: 80px 20px 40px; max-width: 900px; z-index: 2; }
+        .self-portrait {
+            width: 120px; height: 120px; border: 1px solid var(--accent);
+            padding: 8px; object-fit: cover; margin-bottom: 20px; border-radius: 50%;
+        }
+        h1 { font-weight: 200; letter-spacing: 15px; text-transform: uppercase; font-size: 2.5rem; margin: 0; }
+        .bio { line-height: 1.8; color: var(--text-dim); font-size: 1rem; margin-top: 15px; max-width: 550px; margin: 0 auto; }
+
+        .main-content {
+            width: 100%;
+            max-width: 1400px;
+            padding: 40px 10%;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        /* --- THE DOMINANT IMAGE (FLUID HEIGHT) --- */
+        .dominant-item {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius);
+            margin-bottom: 40px;
+            background: none; /* Removed black background */
+        }
+
+        /* --- THE SUB-GRID (FLEXIBLE HEIGHTS) --- */
+        .sub-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start; /* Crucial: prevents stretching */
+        }
+
+        .work-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: none;
+        }
+
+        /* THE FIX: Use width 100% and height auto with NO object-fit */
+        .work-item img, .dominant-item img {
+            width: 100%;
+            height: auto; 
+            display: block;
+            transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 70%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 30px; opacity: 0; transition: 0.5s;
+        }
+
+        .work-item:hover .work-overlay, .dominant-item:hover .work-overlay { opacity: 1; }
+        .work-item:hover img, .dominant-item:hover img { transform: scale(1.03); }
+
+        .work-title { text-transform: uppercase; letter-spacing: 4px; font-size: 1.2rem; margin-bottom: 5px; }
+        .work-desc { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 2px; }
+
+        @media (max-width: 1200px) { .side-text { display: none; } .main-content { padding: 40px 5%; } }
+        @media (max-width: 800px) { .sub-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="side-text side-left"><span>CREATIVITY TAKES COURAGE</span></div>
+    <div class="side-text side-right"><span>STAY HUNGRY STAY FOOLISH</span></div>
+
+    <nav>
+        <a href="index.html" class="nav-btn active">Home</a>
+        <a href="photography.html" class="nav-btn">Photography</a>
+        <a href="design.html" class="nav-btn">Design</a>
+        <a href="contact.html" class="nav-btn">Contact</a>
+    </nav>
+
+    <div class="hero">
+        <img src="pa1.jpg" alt="Portrait" class="self-portrait">
+        <h1>Anthony To</h1>
+        <p class="bio">A high school creative exploring digital precision and organic form. Focused on minimalist brand identities and capturing the power of dramatic light.</p>
+    </div>
+
+    <div class="main-content">
+        <div class="dominant-item">
+            <img src="1.png" alt="Dominant Hero">
+            <div class="work-overlay">
+                <div class="work-title">The Featured Work</div>
+                <div class="work-desc">Landscape Photography — 2024</div>
+            </div>
+        </div>
+
+        <div class="sub-grid">
+            <div class="work-item">
+                <img src="2.png">
+                <div class="work-overlay"><div class="work-title">Neon Noir</div><div class="work-desc">Branding</div></div>
+            </div>
+            <div class="work-item">
+                <img src="3.png">
+                <div class="work-overlay"><div class="work-title">Shadow Play</div><div class="work-desc">UX/UI</div></div>
+            </div>
+            <div class="work-item">
+                <img src="8.png">
+                <div class="work-overlay"><div class="work-title">Eclipse</div><div class="work-desc">Editorial Design</div></div>
+            </div>
+            <div class="work-item">
+                <img src="9.png">
+                <div class="work-overlay"><div class="work-title">Visual ID</div><div class="work-desc">Brand Concept</div></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
